@@ -1,9 +1,10 @@
-import { Page,Locator } from '@playwright/test';
+import { Page,Locator, expect } from '@playwright/test';
 import { BasePage } from './BasePage';
 
 export class HomePage extends BasePage {
   readonly productLink: Locator;
   readonly AddToCartBtn: Locator;
+  
 
   constructor(page: Page) {
     super(page);
@@ -24,6 +25,7 @@ export class HomePage extends BasePage {
 
   async AddToCart() {
     await this.AddToCartBtn.waitFor({ state: 'visible' });
+    await expect(this.AddToCartBtn).toBeEnabled({ timeout: 15000 });
      await this.AddToCartBtn.click();
   }
 }
