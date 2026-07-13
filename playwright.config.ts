@@ -1,11 +1,9 @@
-import { ar } from '@faker-js/faker';
-import { devices } from '@playwright/test';
-
+import { devices, defineConfig } from '@playwright/test';
+import dotenv from 'dotenv';
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
-// import dotenv from 'dotenv';
 // dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 /**
@@ -24,7 +22,7 @@ const config = {
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://127.0.0.1:3000',
     browserName: 'chromium',
-    headless: false,
+    headless: process.env.CI === 'true',
     viewport: null,
     launchOptions: {
       args: ['--start-fullscreen'],
